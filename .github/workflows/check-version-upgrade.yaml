@@ -15,7 +15,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: fetch-tags
-        run: git fetch --tags origin
+        run: git fetch --prune --unshallow --tags origin
       - name: fetch-versions
         run: |
           echo "PAST_VERSION=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
