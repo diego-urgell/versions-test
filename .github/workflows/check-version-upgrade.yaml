@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  check-version:
+  get-versions:
     name: Check Version Upgrade
     runs-on: ubuntu-latest
     steps:
@@ -20,8 +20,12 @@ jobs:
         run: |
           echo "PAST_VERSION=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
           echo "NEW_VERSION=$(cat VERSION)" >> $GITHUB_ENV
+  check-versions:
+    name: check-versions
+    runs-on: ubuntu-latest
+    if: ${{ env.NEW_VERSION }} == ${{ env.PAST_VERSION }}
+    steps:
       - name: check-versions
-        if: ${{ env.NEW_VERSION }} == ${{ env.PAST_VERSION }}
         uses: actions/github-script@v3
         with:
           script: |
