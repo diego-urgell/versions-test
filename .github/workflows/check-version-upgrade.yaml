@@ -14,6 +14,8 @@ jobs:
         uses: actions/checkout@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+      - name: fetch-tags
+        run: git fetch --tags origin
       - name: fetch-versions
         run: |
           echo "PAST_VERSION=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
