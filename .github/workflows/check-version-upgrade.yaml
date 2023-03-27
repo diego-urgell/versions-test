@@ -10,7 +10,9 @@ jobs:
     name: Check Version Upgrade
     runs-on: ubuntu-latest
     if: ${{ (cat VERSION) }} == ${{ (git describe --tags --abbrev=0) }}
-    uses: actions/github-script@v3
-    with:
-      script: |
-        core.setFailed('expected a version upgrade')
+    steps:
+      - name: check-version
+        uses: actions/github-script@v3
+        with:
+          script: |
+            core.setFailed('expected a version upgrade')
