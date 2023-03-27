@@ -18,7 +18,7 @@ jobs:
         run: git fetch --tags origin
       - name: fetch-versions
         run: |
-          echo "PAST_VERSION=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
+          echo "PAST_VERSION=$(git describe --tags --abbrev=0 | cut -c 2-)" >> $GITHUB_ENV
           echo "NEW_VERSION=$(cat VERSION)" >> $GITHUB_ENV
       - name: check-versions
         if: ${{ env.NEW_VERSION == env.PAST_VERSION }}
