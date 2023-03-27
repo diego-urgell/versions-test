@@ -9,9 +9,14 @@ jobs:
   check-version:
     name: Check Version Upgrade
     runs-on: ubuntu-latest
-    if: ${{ (cat VERSION) }} == ${{ (git describe --tags --abbrev=0) }}
     steps:
+      - name: fetch-versions
+        id: step_one
+        run: |
+          echo "PAST_VERSION=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
+          echo "NEW_VERSION=$(cat VERSION)" >> $GITHUB_ENV
       - name: check-version
+        if: ${{ env.NEW_VERSION }} == ${{ env.PAST_VERSION }}
         uses: actions/github-script@v3
         with:
           script: |
