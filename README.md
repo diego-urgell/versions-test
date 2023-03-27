@@ -17,3 +17,5 @@ The [VERSION](VERSION) file holds the version info. On a push to main, the [tag 
 Every pull request should update the value in the `VERSION` file. If you are not sure when you should tag your project with version 1.0.0, this version should be when it is ready to be used by your "customer" (another dev, project, or external client).
 
 This is a simple change to test how versions are created :) 
+
+Yet another change without modifying the version 
