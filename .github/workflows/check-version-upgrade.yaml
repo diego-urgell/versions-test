@@ -1,0 +1,16 @@
+name: Check Version Upgrade
+
+on:
+  push:
+    branches-ignore:
+      - master
+
+jobs:
+  check-version:
+    name: Check Version Upgrade
+    runs-on: ubuntu-latest
+    if: ${{ (cat VERSION) }} == ${{ (git describe --tags --abbrev=0) }}
+    uses: actions/github-script@v3
+    with:
+      script: |
+        core.setFailed('expected a version upgrade')
