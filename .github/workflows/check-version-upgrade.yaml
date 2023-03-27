@@ -10,12 +10,15 @@ jobs:
     name: Check Version Upgrade
     runs-on: ubuntu-latest
     steps:
+      - name: checkout
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
       - name: fetch-versions
-        id: step_one
         run: |
           echo "PAST_VERSION=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
           echo "NEW_VERSION=$(cat VERSION)" >> $GITHUB_ENV
-      - name: check-version
+      - name: check-versions
         if: ${{ env.NEW_VERSION }} == ${{ env.PAST_VERSION }}
         uses: actions/github-script@v3
         with:
